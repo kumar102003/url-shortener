@@ -1,20 +1,4 @@
 
-
----
-
-### **📌 Steps to Save & Push This README to GitHub**
-1️⃣ **Create a new file** in your project root:  
-   - File name: **`README.md`**
-2️⃣ **Copy & Paste the content below**
-3️⃣ **Push to GitHub**:
-   ```sh
-   git add README.md
-   git commit -m "Added README file"
-   git push origin main
-   ```
-
----
-
 ### **📄 README.md File**
 ```md
 # 🔗 High-Performance URL Shortener in C++
