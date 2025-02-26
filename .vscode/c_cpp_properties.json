@@ -1,0 +1,27 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Program Files/MySQL/MySQL Server 8.0/include/",
+                "C:/Program Files/MySQL/MySQL Server 8.0/include/mysql/"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:/MinGW/bin/g++.exe",
+            "cStandard": "c11",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "windows-gcc-x64",
+            "browse": {
+                "path": [
+                    "C:/Program Files/MySQL/MySQL Server 8.0/include/"
+                ]
+            }
+        }
+    ],
+    "version": 4
+}
