@@ -1,14 +1,34 @@
 cmake_minimum_required(VERSION 3.10)
-project(URL_Shortener)
+project(url_shortener)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# MySQL Server paths
-include_directories("C:/Program Files/MySQL/MySQL Server 8.0/include/")
-link_directories("C:/Program Files/MySQL/MySQL Server 8.0/lib/")
+# Find MySQL
+find_package(MySQL REQUIRED)
 
-# Add executable
-add_executable(url_shortener main.cpp server.cpp database.cpp shortener.cpp)
+# Add Crow as a subdirectory
+add_subdirectory(Crow-master)
 
-# Link MySQL C API library
-target_link_libraries(url_shortener libmysql)
+# Add source files
+set(SOURCES
+    src/main.cpp
+    src/server.cpp
+    src/database.cpp
+    src/shortener.cpp
+)
+
+# Create executable
+add_executable(url_shortener ${SOURCES})
+
+# Include directories
+target_include_directories(url_shortener PRIVATE
+    ${CMAKE_SOURCE_DIR}/src
+    ${MYSQL_INCLUDE_DIR}
+)
+
+# Link libraries
+target_link_libraries(url_shortener PRIVATE
+    ${MYSQL_LIBRARIES}
+    Crow::Crow
+)

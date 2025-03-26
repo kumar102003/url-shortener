@@ -1,87 +1,86 @@
+# URL Shortener
 
-### **📄 README.md File**
-```md
-# 🔗 High-Performance URL Shortener in C++
+A simple URL shortener service built with C++, Crow framework, and MySQL.
 
-🚀 A lightweight, high-performance URL shortener written in **C++** using **Crow (Web Framework)** and **MySQL**.
+## Prerequisites
 
-⚠️ **Project Status: In Development**  
-This project is currently under active development and will be updated soon.
+- C++17 compatible compiler
+- CMake 3.10 or higher
+- MySQL Server
+- Git
 
----
+## Setup
 
-## 📌 Features (Planned)
-✅ Shorten long URLs into short links  
-✅ Redirect users from short links to the original URL  
-✅ Store URLs in **MySQL** database  
-✅ REST API using **Crow C++ Framework**  
-✅ High-performance, multithreaded request handling  
-
----
-
-## 📂 Project Structure
-```
-url-shortener/
-│── src/
-│   │── main.cpp            # Entry point of the application
-│   │── server.cpp          # Handles HTTP requests
-│   │── server.h            # Header file for server
-│   │── database.cpp        # MySQL interactions
-│   │── database.h          # Header file for MySQL interactions
-│   │── shortener.cpp       # URL shortening logic
-│   │── shortener.h         # Header file for shortener logic
-│   │── config.h            # Configuration settings
-│── include/
-│   │── crow.h              # Crow framework header
-│── CMakeLists.txt          # CMake build system file
-│── Makefile                # Alternative build file
-│── database.sql            # MySQL schema
-│── README.md               # Project documentation
-│── .gitignore              # Ignore unnecessary files
-```
-
----
-
-## 🛠 Installation & Setup
-### **1️⃣ Install Dependencies**
-- Install **MySQL Server**
-- Install **C++ Compiler** (`g++` or `MinGW`)
-- Install **CMake** (if using CMake)
-
-### **2️⃣ Clone This Repository**
-```sh
-git clone https://github.com/yourusername/url-shortener.git
+1. Clone the repository:
+```bash
+git clone <repository-url>
 cd url-shortener
 ```
 
-### **3️⃣ Build the Project**
-Using **Makefile**:
-```sh
-mingw32-make
+2. Set up the MySQL database:
+```bash
+mysql -u root -p < database.sql
 ```
-or using **CMake**:
-```sh
-mkdir build && cd build
+
+3. Configure the database connection:
+Edit `src/config.h` and update the MySQL credentials:
+```cpp
+#define MYSQL_HOST "localhost"
+#define MYSQL_USER "your_username"
+#define MYSQL_PASSWORD "your_password"
+#define MYSQL_DATABASE "url_shortener"
+```
+
+4. Build the project:
+```bash
+mkdir build
+cd build
 cmake ..
 cmake --build .
 ```
 
----
+## Usage
 
-## 🚀 Running the URL Shortener
-After building, run:
-```sh
-./url-shortener
+1. Start the server:
+```bash
+./url_shortener
 ```
-The server should start on **`http://localhost:8080/`**.
 
----
+2. The server will start on `http://localhost:8080`
 
-## 📖 API Endpoints (Planned)
-| Method | Endpoint       | Description          |
-|--------|---------------|----------------------|
-| `POST` | `/shorten`    | Shorten a long URL  |
-| `GET`  | `/:short_id`  | Redirect to long URL |
+3. API Endpoints:
 
----
+   - Shorten URL:
+     ```bash
+     curl -X POST http://localhost:8080/shorten \
+          -H "Content-Type: application/json" \
+          -d '{"url": "https://example.com"}'
+     ```
 
+   - Access shortened URL:
+     ```
+     http://localhost:8080/<short_code>
+     ```
+
+## Features
+
+- Generates 6-character random short URLs
+- Stores URLs in MySQL database
+- RESTful API endpoints
+- Automatic redirection from short to long URLs
+
+## Error Handling
+
+- Returns 400 for invalid requests
+- Returns 404 for non-existent short URLs
+- Proper error handling for database operations
+
+## Security
+
+- Input validation for URLs
+- SQL injection prevention
+- Basic error handling
+
+## License
+
+MIT License
